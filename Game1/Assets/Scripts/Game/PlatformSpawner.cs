@@ -27,8 +27,8 @@ public class PlatformSpawner : MonoBehaviour
             // Crea plataformas de diferentes tamaños
             instance.transform.localScale = new Vector3(
                 Random.Range(scaleRange.x, scaleRange.y),
-                instance.transform.localState.y,
-                instance.transform.localState.z
+                instance.transform.localScale.y,
+                instance.transform.localScale.z
             );
 
             // Aumenta en 2% la velocidad del tiempo para la dificultad

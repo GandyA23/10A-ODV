@@ -6,8 +6,9 @@ public class PlatformMovement : MonoBehaviour
 {
     // Velocidad en la cuál se va a mover la plataforma
 	[SerializeField] private float speed = 10f;
+    [SerializeField] private float deleteAfter = 100f;
 
-	// Realiza el movimiento de la plataforma
+    // Realiza el movimiento de la plataforma
     // Update is called once per frame
     void Update () 
     {
@@ -15,7 +16,7 @@ public class PlatformMovement : MonoBehaviour
         transform.position += Vector3.right * speed * Time.deltaTime;
     
         // Si la plataforma se movió más de 10 unidades, entonces destruye el objeto
-        if (transform.position.x > 10f) 
+        if (transform.position.x > deleteAfter) 
         {
             Destroy(this.gameObject);
         }
