@@ -308,9 +308,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3625983667170359401, guid: c7ab758740af1fd4db79f914666575e2, type: 3}
+      propertyPath: m_Height
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625983667170359401, guid: c7ab758740af1fd4db79f914666575e2, type: 3}
+      propertyPath: m_Center.y
+      value: 0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 6067181031519782348, guid: c7ab758740af1fd4db79f914666575e2, type: 3}
       propertyPath: m_Name
-      value: Ch18_nonPBR
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6879571327004041078, guid: c7ab758740af1fd4db79f914666575e2, type: 3}
       propertyPath: m_RootOrder

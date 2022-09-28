@@ -1,18 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class InputReader : MonoBehaviour
+// Esta clase nos ayuda a filtrar la entrada
+public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    public Vector2 MovementValue { get; private set; }
+    public event Action JumpEvent;
+    private Controls controls;
+
     // Start is called before the first frame update
     void Start()
     {
+        controls = new Controls();
+
+        // Configura los callbacks de OnJump y OnMove para poder realizar las acciones con el jugador
+        controls.Player.SetCallbacks(this);
         
+        // Habilita esos callbacks
+        controls.Player.Enable();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        controls.Player.Disable();
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {   
+        // Verifica que haya presionado el/los botón/botones [Keyboard : Espacio] para realizar el evento
+        if (!context.performed) { return; }
+        JumpEvent?.Invoke();
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        // Debido a que es movimiento, entonces es necesario solo pasarle el Vector2 del contexto
+        MovementValue = context.ReadValue<Vector2>();
     }
 }
