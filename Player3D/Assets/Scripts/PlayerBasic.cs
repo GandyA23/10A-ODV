@@ -11,11 +11,11 @@ public class PlayerBasic : MonoBehaviour, Controls.IPlayerActions
     private Vector3 MovementDirection;
     private Animator Animator;
     [SerializeField]
-    private float Speed = 2.5f;
+    private float Speed = 5f;
     [SerializeField]
-    private float AnimationDamping = 0f;
+    private float AnimationDamping = 0.05f;
     [SerializeField]
-    private float RotationDamping = 0f;
+    private float RotationDamping = 20f;
     private int ParameterId = Animator.StringToHash("Blend");
 
 
@@ -44,20 +44,28 @@ public class PlayerBasic : MonoBehaviour, Controls.IPlayerActions
     void Update()
     {
         // Los valores de Y los convierte a Z
-        MovementDirection = new Vector3(
-            InputDirection.x,
-            0,
-            InputDirection.y
-        );
+        //MovementDirection = new Vector3(
+        //    InputDirection.x,
+        //    0,
+        //    InputDirection.y
+        //);
+
+        MovementDirection = CalculateMovement();
 
         Controller.Move(MovementDirection * Time.deltaTime * Speed);
 
         // No rotes a no ser que rotes alguna de las teclas
         if (InputDirection.magnitude != 0)
         {
+            Vector3 movementDirection = new Vector3(
+                MovementDirection.x,
+                0f,
+                MovementDirection.z                
+            );
+
             transform.rotation = Quaternion.Lerp(
                 transform.rotation,
-                Quaternion.LookRotation(MovementDirection),
+                Quaternion.LookRotation(movementDirection),
                 RotationDamping * Time.deltaTime 
             );
             Animator.SetFloat(ParameterId, 1f, AnimationDamping, Time.deltaTime); // Activa la animación
@@ -66,6 +74,31 @@ public class PlayerBasic : MonoBehaviour, Controls.IPlayerActions
         {
             Animator.SetFloat(ParameterId, 0f, AnimationDamping, Time.deltaTime); // Desactiva la animación
         }
+    }
+
+    private Vector3 CalculateMovement()
+    {
+        Vector3 moveDir = Vector3.zero;
+
+        // Accede al atributo transform de la camara
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+
+        // Los valores hacia arriba (eje y) no me interesan para el movimiento
+        forward.y = 0f;
+        right.y = 0f;
+
+        // Normaliza la magnitud
+        forward.Normalize();
+        right.Normalize();
+
+        // InputDirection.y = (Teclas W S)
+        // InputDirection.x = (Teclas A D)
+        moveDir = forward * InputDirection.y + right * InputDirection.x;
+
+        moveDir.y = -5;
+
+        return moveDir;
     }
 
     private void OnDisable()
