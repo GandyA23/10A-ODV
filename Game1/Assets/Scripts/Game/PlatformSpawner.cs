@@ -11,6 +11,7 @@ public class PlatformSpawner : MonoBehaviour
     void Start () 
     {
         StartCoroutine("SpawnPlatforms");
+        Time.timeScale = 1f;
     }	
 
     public IEnumerator SpawnPlatforms () 
@@ -18,7 +19,7 @@ public class PlatformSpawner : MonoBehaviour
         while (true)
         {
             // Espera N segundos antes de continuar con la secuencia
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.75f);
             
             // Crea un nuevo objeto de platform en el punto de la izquierda con la rotación normal
             // Retorna el GameObject de la copia

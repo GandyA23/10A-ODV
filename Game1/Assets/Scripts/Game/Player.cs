@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Player : MonoBehaviour
 
     // forceMagnitude nos ayudará a aplicar una fuerza hacia arriba para el salto
     [SerializeField] private float forceMagnitude = 1000f;
+    
+    // Altura en la cuál se considera que el jugador ha perdido
+    [SerializeField] private float heightLost = -10;
 
     private bool isGrounded;
 
@@ -20,6 +24,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
         {
             rbComponent.AddForce(Vector3.up * forceMagnitude);
-        }   
+        }
+
+        if (transform.position.y < heightLost)
+        {
+            SceneManager.LoadScene("GameScore");
+        }
     }
 }
