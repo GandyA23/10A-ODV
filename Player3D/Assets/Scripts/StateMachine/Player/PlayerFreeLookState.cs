@@ -32,8 +32,7 @@ public class PlayerFreeLookState : PlayerBaseState
     }
 
     public override void Exit()
-    { 
-    
+    {
     }
 
     private Vector3 CalculateMovement() 
