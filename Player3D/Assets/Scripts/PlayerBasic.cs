@@ -106,4 +106,14 @@ public class PlayerBasic : MonoBehaviour, Controls.IPlayerActions
         // Cuando el objeto es destruido o desactivado, es necesario deshabilitar los controles
         Controls.Player.Disable();
     }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }

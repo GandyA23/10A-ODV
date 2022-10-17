@@ -8,9 +8,7 @@ public class MovingState : PlatformBaseState
 
     private float speed = 5f;
 
-    public MovingState(PlatformStateMachine stateMachine) : base(stateMachine)
-    {
-    }
+    public MovingState(PlatformStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
