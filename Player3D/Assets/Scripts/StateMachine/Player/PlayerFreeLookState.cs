@@ -7,12 +7,16 @@ using UnityEngine;
 public class PlayerFreeLookState : PlayerBaseState
 {
     private readonly int freeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
+    private readonly int freeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
     private const float animatorDampTime = 0.05f;
 
     public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
+        // Empieza a reproducir la animación al momento de cambiar el estado
+        stateMachine.Animator.Play(freeLookBlendTreeHash);
+
         stateMachine.InputReader.TargetEvent += OnTarget;
     }
 
