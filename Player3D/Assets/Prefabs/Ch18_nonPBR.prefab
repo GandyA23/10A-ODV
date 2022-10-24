@@ -1359,6 +1359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e884185582bd404b8ae43823ca000d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cineTargetGroup: {fileID: 0}
   targets: []
 --- !u!1 &6067181031519782348
 GameObject:
@@ -1373,6 +1374,7 @@ GameObject:
   - component: {fileID: 8511284757975986780}
   - component: {fileID: 4219395951284837571}
   - component: {fileID: 4400658301189199241}
+  - component: {fileID: 1721817804212294009}
   m_Layer: 0
   m_Name: Ch18_nonPBR
   m_TagString: Untagged
@@ -1452,8 +1454,10 @@ MonoBehaviour:
   <CharacterController>k__BackingField: {fileID: 3625983667170359401}
   <Animator>k__BackingField: {fileID: 8511284757975986780}
   <Targeter>k__BackingField: {fileID: 1257328252753710871}
+  <ForceReceiver>k__BackingField: {fileID: 1721817804212294009}
   <FreeLookMovementSpeed>k__BackingField: 3
   <RotationDamping>k__BackingField: 30
+  <TargetingMovementSpeed>k__BackingField: 2.5
 --- !u!114 &4400658301189199241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1466,6 +1470,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3f18ab017980b4897cd3568e78bef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1721817804212294009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067181031519782348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 176165b75ae307b4697143440753ff80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 3625983667170359401}
 --- !u!1 &6241410916341813736
 GameObject:
   m_ObjectHideFlags: 0
