@@ -6,14 +6,16 @@ using UnityEngine;
 public class PlayerTargetingState : PlayerBaseState
 {
 
-    private readonly int targetingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
+    private readonly int TargetingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
+    private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
+    private readonly int TargetingRightHash = Animator.StringToHash("TargetingRight");
 
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
     public override void Enter()
     {
         // Empieza a reproducir la animación
-        stateMachine.Animator.Play(targetingBlendTreeHash);
+        stateMachine.Animator.Play(TargetingBlendTreeHash);
         stateMachine.InputReader.CancelEvent += OnCancel;
     }
 
@@ -36,6 +38,19 @@ public class PlayerTargetingState : PlayerBaseState
         Move(movement * stateMachine.TargetingMovementSpeed, deltaTime);
 
         FaceTarget();
+
+        // Actualiza las animaciones dependiendo los valores Float
+        // TargetingForwardHash y TargetingRightHash
+        UpdateAnimator(deltaTime);
+    }
+
+    private void UpdateAnimator(float deltaTime)
+    {
+        if (stateMachine.InputReader.MovementValue.y == 0)
+        {
+            stateMachine.Animator.SetFloat(TargetingForwardHash, 0, 0.5f, deltaTime);
+        }
+
     }
 
     private void OnCancel()
